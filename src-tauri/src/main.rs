@@ -5,13 +5,23 @@
 
 mod file_server;
 
-use local_ip_address::local_ip;
+use get_if_addrs::{get_if_addrs, IfAddr};
 use tauri::command;
 
 #[command]
 fn get_device_ip() -> String {
-    match local_ip() {
-        Ok(ip) => ip.to_string(),
+    match get_if_addrs() {
+        Ok(ifaces) => {
+            for iface in ifaces {
+                if let IfAddr::V4(ipv4) = iface.addr {
+                    let ip = ipv4.ip;
+                    if ip.is_private() && !ip.is_loopback() && !ip.is_link_local() {
+                        return ip.to_string();
+                    }
+                }
+            }
+            "No suitable IP found".to_string()
+        }
         Err(_) => "Unable to retrieve IP".to_string(),
     }
 }
