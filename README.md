@@ -11,11 +11,10 @@
 
 ## ✨ Features
 
-- 🔐 Share files securely via your local network or hotspot  
-- 🔗 Each shared file gets a unique tokenized URL  
-- 📱 Scan a QR code to instantly access the file on any device  
-- 🖥️ Minimal UI with file selection and server control  
-- ⚡ Fast, lightweight, and internet-independent  
+- 🔐 Share files securely via your local network or hotspot
+- 🔗 Each shared file gets a unique tokenized URL
+- 🖥️ Minimal UI with file selection and server control
+- ⚡ Fast, lightweight, and internet-independent
 
 ---
 
@@ -24,8 +23,12 @@
 ### Prerequisites
 
 - Rust (stable)
-- Node.js & npm
-- Tauri CLI  
+```bash
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+- Node.js & npm (https://nodejs.org/en/download)
+- Tauri CLI
+
 ```bash
 npm create tauri-app@latest -- --tauri-version 1
 ```
@@ -38,7 +41,14 @@ cd waveshare
 npm install
 npm run tauri dev
 ```
+
 This will launch the Tauri app with a Rust backend powered by Actix Web.
+NOTE: you might run into some missing dependencies errors, just do this:
+```bash
+sudo apt update
+sudo apt-get install libsoup2.4-dev
+sudo apt install libwebkit2gtk-4.0-dev
+```
 
 ## 🔧 Backend Design
 
@@ -67,7 +77,6 @@ This will launch the Tauri app with a Rust backend powered by Actix Web.
 - Download tracking
 - Auto-shutdown timer
 - Password protection for shared links
-
 
 ```
 Made with ❤️ by wavesharers
